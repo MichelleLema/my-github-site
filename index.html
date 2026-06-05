@@ -1,32 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michelle's Website</title>
-    <style>
-      body { font-family: Arial, sans-serif; max-width: 800px;
-             margin: 0 auto; padding: 20px; background: #f5f5f5; }
-      h1   { color: #1F4E79; }
-      h2   { color: #2E75B6; border-bottom: 2px solid #2E75B6; }
-      p    { line-height: 1.6; }
-    </style>
-  </head>
-  <body>
-    <h1>Hi, I'm Michelle!</h1>
- 
-    <h2>About Me</h2>
-    <p>Im in 9th grade and im am interested in going into an engineering career</p>
- 
-    <h2>My Interests</h2>
-    <p>I enjoy drawing and being outside </p>
- 
-    <h2>My Goals for This Course</h2>
-    <p>My goal for this couse is to learn more about computer science</p>
- 
-    <h2>My GitHub</h2>
-    <p>Check out my projects: 
-      <a href="https://github.com/MichelleLema">MichelleLema</a>
-    </p>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michelle's Website</title>
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #333333;
+      --h1-color: #1F4E79;
+      --h2-color: #2E75B6;
+      --grad-start: #eaeaea;
+      --grad-end: #f5f5f5;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --h1-color: #4f93ce;
+      --h2-color: #5c99d6;
+      --grad-start: #1a1a1a;
+      --grad-end: #121212;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: radial-gradient(circle at top right, rgba(147, 51, 234, 0.15), transparent 60%), linear-gradient(var(--grad-start), var(--grad-end));
+      background-attachment: fixed;
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    h1 {
+      color: var(--h1-color);
+    }
+
+    h2 {
+      color: var(--h2-color);
+      border-bottom: 2px solid var(--h2-color);
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--h2-color);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      cursor: pointer;
+      background-color: var(--h2-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Mode</button>
+
+  <h1>Hi, I'm Michelle!</h1>
+  
+  <h2>About Me</h2>
+  <p>Im in 9th grade and im am interested in going into an engineering career</p>
+  
+  <h2>My Interests</h2>
+  <p>I enjoy drawing and being outside </p>
+  
+  <h2>My Goals for This Course</h2>
+  <p>My goal for this couse is to learn more about computer science</p>
+  
+  <h2>My GitHub</h2>
+  <p>Check out my projects: <a href="https://github.com/MichelleLema">MichelleLema</a> </p>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        html.removeAttribute('data-theme');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+      }
+    }
+  </script>
+</body>
 </html>
