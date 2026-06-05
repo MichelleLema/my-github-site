@@ -6,82 +6,149 @@
   <title>Michelle's Website</title>
   <style>
     :root {
-      --bg-color: #f5f5f5;
-      --text-color: #333333;
-      --h1-color: #1F4E79;
-      --h2-color: #2E75B6;
-      --grad-start: #eaeaea;
-      --grad-end: #f5f5f5;
+      --bg-color: #f3effa;
+      --card-bg: #ffffff;
+      --text-color: #3b354a;
+      --h1-color: #4a2874;
+      --h2-color: #6d44a6;
+      --accent-color: #8b5cf6;
+      --border-color: #e2d9f3;
     }
 
     [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --h1-color: #4f93ce;
-      --h2-color: #5c99d6;
-      --grad-start: #1a1a1a;
-      --grad-end: #121212;
+      --bg-color: #1a1625;
+      --card-bg: #241e36;
+      --text-color: #e3daf5;
+      --h1-color: #c0a5ec;
+      --h2-color: #a78bfa;
+      --accent-color: #a78bfa;
+      --border-color: #3d3554;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      max-width: 750px;
       margin: 0 auto;
-      padding: 20px;
-      background: radial-gradient(circle at top right, rgba(147, 51, 234, 0.15), transparent 60%), linear-gradient(var(--grad-start), var(--grad-end));
+      padding: 40px 20px;
+      background: linear-gradient(135deg, var(--bg-color), #ede7f6);
       background-attachment: fixed;
       color: var(--text-color);
       transition: background 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+
+    [data-theme="dark"] body {
+      background: linear-gradient(135deg, var(--bg-color), #13101c);
+      background-attachment: fixed;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border-color);
     }
 
     h1 {
       color: var(--h1-color);
+      font-size: 2.2rem;
+    }
+
+    .theme-toggle {
+      padding: 10px 18px;
+      cursor: pointer;
+      background-color: var(--h2-color);
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      background-color: var(--h1-color);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    section {
+      background-color: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(109, 68, 166, 0.05);
+      border: 1px solid var(--border-color);
+      transition: background-color 0.3s, border-color 0.3s;
     }
 
     h2 {
       color: var(--h2-color);
-      border-bottom: 2px solid var(--h2-color);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     p {
-      line-height: 1.6;
+      font-size: 1.05rem;
     }
 
     a {
-      color: var(--h2-color);
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
     }
 
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      cursor: pointer;
-      background-color: var(--h2-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
+    a:hover {
+      border-color: var(--accent-color);
     }
   </style>
 </head>
 <body>
 
-  <button class="theme-toggle" onclick="toggleTheme()">Toggle Mode</button>
+  <header>
+    <h1>Hi, I'm Michelle!</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">✨ Theme Mode</button>
+  </header>
 
-  <h1>Hi, I'm Michelle!</h1>
-  
-  <h2>About Me</h2>
-  <p>Im in 9th grade and im am interested in going into an engineering career</p>
-  
-  <h2>My Interests</h2>
-  <p>I enjoy drawing and being outside </p>
-  
-  <h2>My Goals for This Course</h2>
-  <p>My goal for this couse is to learn more about computer science</p>
-  
-  <h2>My GitHub</h2>
-  <p>Check out my projects: <a href="https://github.com/MichelleLema">MichelleLema</a> </p>
+  <main class="grid-container">
+    <section>
+      <h2>👋 About Me</h2>
+      <p>I'm in 9th grade and I am interested in going into an engineering career.</p>
+    </section>
+    
+    <section>
+      <h2>🎨 My Interests</h2>
+      <p>I enjoy drawing and being outside.</p>
+    </section>
+    
+    <section>
+      <h2>🚀 My Goals for This Course</h2>
+      <p>My goal for this course is to learn more about computer science.</p>
+    </section>
+    
+    <section>
+      <h2>💻 My GitHub</h2>
+      <p>Check out my projects: <a href="https://github.com/MichelleLema" target="_blank" rel="noopener noreferrer">MichelleLema</a></p>
+    </section>
+  </main>
 
   <script>
     function toggleTheme() {
