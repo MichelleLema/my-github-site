@@ -7,22 +7,26 @@
   <style>
     :root {
       --bg-color: #f3effa;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.9); /* Slightly transparent for glass effect */
       --text-color: #3b354a;
       --h1-color: #4a2874;
       --h2-color: #6d44a6;
       --accent-color: #8b5cf6;
       --border-color: #e2d9f3;
+      --space-bg: linear-gradient(135deg, #f3effa, #e4daf5, #d2c4f0); /* Light space/nebula */
+      --sun-color: #ffb703;
     }
 
     [data-theme="dark"] {
       --bg-color: #1a1625;
-      --card-bg: #241e36;
+      --card-bg: rgba(36, 30, 54, 0.9); /* Slightly transparent for glass effect */
       --text-color: #e3daf5;
       --h1-color: #c0a5ec;
       --h2-color: #a78bfa;
       --accent-color: #a78bfa;
       --border-color: #3d3554;
+      --space-bg: linear-gradient(135deg, #0b0813, #1a1625, #110d1c); /* Dark space */
+      --sun-color: #f97316;
     }
 
     * {
@@ -36,16 +40,102 @@
       max-width: 750px;
       margin: 0 auto;
       padding: 40px 20px;
-      background: linear-gradient(135deg, var(--bg-color), #ede7f6);
+      background: var(--space-bg);
       background-attachment: fixed;
       color: var(--text-color);
       transition: background 0.3s, color 0.3s;
       line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    [data-theme="dark"] body {
-      background: linear-gradient(135deg, var(--bg-color), #13101c);
-      background-attachment: fixed;
+    /* Animated Space Background Container */
+    .space-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Central Sun */
+    .sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--sun-color);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 40px var(--sun-color);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    /* Orbit Lines and Planet Containers */
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px dashed rgba(139, 92, 246, 0.15);
+      transform: translate(-50%, -50%);
+    }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Planet 1 (Inner, Purple) */
+    .orbit-1 {
+      width: 300px;
+      height: 300px;
+      animation: spin 20s linear infinite;
+    }
+    .planet-1 {
+      width: 20px;
+      height: 20px;
+      background: #a78bfa;
+      box-shadow: 0 0 10px #a78bfa;
+    }
+
+    /* Planet 2 (Middle, Pink) */
+    .orbit-2 {
+      width: 550px;
+      height: 550px;
+      animation: spin 35s linear infinite reverse; /* Rotates backwards */
+    }
+    .planet-2 {
+      width: 30px;
+      height: 30px;
+      background: #ec4899;
+      box-shadow: 0 0 15px #ec4899;
+    }
+
+    /* Planet 3 (Outer, Cyan) */
+    .orbit-3 {
+      width: 850px;
+      height: 850px;
+      animation: spin 55s linear infinite;
+    }
+    .planet-3 {
+      width: 25px;
+      height: 25px;
+      background: #06b6d4;
+      box-shadow: 0 0 12px #06b6d4;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
     }
 
     header {
@@ -57,6 +147,7 @@
       border-bottom: 2px solid var(--border-color);
       flex-wrap: wrap;
       gap: 15px;
+      position: relative;
     }
 
     /* Typing Animation for Heading */
@@ -114,6 +205,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 20px;
+      position: relative;
     }
 
     section {
@@ -123,6 +215,7 @@
       box-shadow: 0 4px 12px rgba(109, 68, 166, 0.05);
       border: 1px solid var(--border-color);
       transition: background-color 0.3s, border-color 0.3s;
+      backdrop-filter: blur(4px); /* Smoothes view of background elements */
     }
 
     h2 {
@@ -157,6 +250,14 @@
   </style>
 </head>
 <body onclick="startMusicOnFirstInteraction()">
+
+  <!-- Space Background Engine Hidden Safely Behind Layout Layers -->
+  <div class="space-background">
+    <div class="sun"></div>
+    <div class="orbit orbit-1"><div class="planet planet-1"></div></div>
+    <div class="orbit orbit-2"><div class="planet planet-2"></div></div>
+    <div class="orbit orbit-3"><div class="planet planet-3"></div></div>
+  </div>
 
   <!-- Audio Element hosting the Wii Sports Theme Loop -->
   <audio id="wii-music" loop>
@@ -201,7 +302,7 @@
     let hasInteracted = false;
 
     // Sets standard background volume levels
-    audio.volume = 10; 
+    audio.volume = 0.1; /* Fixed typo: Volume goes from 0.0 to 1.0 */
 
     // Automatically plays audio safely on the very first click anywhere on the page
     function startMusicOnFirstInteraction() {
